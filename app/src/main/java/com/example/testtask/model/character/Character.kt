@@ -1,4 +1,5 @@
-package com.example.testtask.model
+package com.example.testtask.model.character
+
 
 data class Character(val created: String = "",
                      val episode: List<String> = listOf(),
@@ -14,10 +15,12 @@ data class Character(val created: String = "",
                      val url: String = ""
 )
 {
+
     data class Location(
         val name: String = "",
         val url: String = ""
     )
+
 
     data class Origin(
         val name: String = "",

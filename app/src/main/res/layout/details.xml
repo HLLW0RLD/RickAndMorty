@@ -1,6 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/details">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <ImageView
+        android:id="@+id/details_icon"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/name"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/details_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/name_details_size"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/species"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/species_size"
+        app:layout_constraintBottom_toBottomOf="@+id/name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/details_icon" />
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/status"
+        android:textSize="@dimen/status_size"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="@dimen/main_margin"
+        android:background="@color/details_title_color"
+        app:layout_constraintBottom_toTopOf="@+id/gender_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status" />
+
+    <TextView
+        android:id="@+id/gender_title"
+        android:text="Gender:"
+        android:textSize="@dimen/info_title_size"
+        android:textColor="@color/details_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/main_margin"
+        app:layout_constraintTop_toBottomOf="@id/status"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/gender"
+        android:textSize="@dimen/info_size"
+        android:textColor="@color/info_details_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/gender_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/origin_title"
+        android:text="Origin:"
+        android:textSize="@dimen/info_title_size"
+        android:textColor="@color/details_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/gender"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/origin"
+        android:textSize="@dimen/info_size"
+        android:textColor="@color/info_details_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/origin_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/location_title"
+        android:text="Location:"
+        android:textSize="@dimen/info_title_size"
+        android:textColor="@color/details_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/origin"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/location"
+        android:textSize="@dimen/info_size"
+        android:textColor="@color/info_details_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/location_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/type_title"
+        android:text="Type:"
+        android:textSize="@dimen/info_title_size"
+        android:textColor="@color/details_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/type"
+        android:textSize="@dimen/info_size"
+        android:textColor="@color/info_details_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/type_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/episodes_title"
+        android:text="Episodes:"
+        android:textSize="@dimen/info_title_size"
+        android:textColor="@color/details_title_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/type"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_margin="@dimen/main_margin"
+        android:id="@+id/episodes"
+        android:textSize="@dimen/info_size"
+        android:textColor="@color/info_details_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/episodes_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/type_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/details_icon"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

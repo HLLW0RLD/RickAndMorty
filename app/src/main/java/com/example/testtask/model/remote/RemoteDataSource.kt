@@ -1,4 +1,4 @@
-package com.example.testtask.model
+package com.example.testtask.model.remote
 
 import com.example.testtask.model.character.Character
 import com.google.gson.GsonBuilder
@@ -14,11 +14,15 @@ class RemoteDataSource {
         .build().create(API :: class.java)
 
 
-    fun getCharById(id: Int, callback: Callback<Character>) {
-       retrofit.getById(id).enqueue(callback)
+    fun getCharById(id: Int) {
+        retrofit.getById(id)
     }
 
     fun getAllChar(){
+        retrofit.getAllChar()
+    }
 
+    fun getCharByName(name : String){
+        retrofit.getCharByName(name)
     }
 }

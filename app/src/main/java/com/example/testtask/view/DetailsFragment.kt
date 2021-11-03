@@ -12,14 +12,14 @@ import com.example.testtask.model.State
 import com.example.testtask.model.character.Character
 import com.example.testtask.viewmodel.ListViewModel
 
-class Details : Fragment() {
+class DetailsFragment : Fragment() {
 
     companion object{
 
         const val BUNDLE_EXTRA = "BUNDLE_EXTRA"
 
-        fun newInstance(bundle: Bundle) : Details{
-            var details = Details()
+        fun newInstance(bundle: Bundle) : DetailsFragment{
+            var details = DetailsFragment()
             details.arguments = bundle
             return details
         }
@@ -40,8 +40,6 @@ class Details : Fragment() {
     ): View? {
 
         viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
-
-        arguments?.getParcelable<Character>(BUNDLE_EXTRA)?.let { viewModel.getCharFromRemote(it) }
 
         _binding = DetailsBinding.inflate(inflater, container, false)
 

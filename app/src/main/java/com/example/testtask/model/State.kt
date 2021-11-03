@@ -1,4 +1,9 @@
 package com.example.testtask.model
 
-class State {
+import com.example.testtask.model.character.Character
+
+sealed class State {
+    object Loading : State()
+    class Error(val error: Throwable) : State()
+    class Success(val characterData: Character) : State()
 }

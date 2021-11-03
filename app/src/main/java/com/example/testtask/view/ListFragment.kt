@@ -6,18 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.example.testtask.R
 import com.example.testtask.databinding.ListBinding
 import com.example.testtask.model.State
 import com.example.testtask.model.character.Character
 import com.example.testtask.viewmodel.ListViewModel
-import kotlinx.android.synthetic.main.details.*
 
-class List<T> : Fragment() {
+class ListFragment : Fragment() {
 
     companion object {
-        fun newInstance() = List<Any>()
+        fun newInstance() = ListFragment()
     }
 
     private val viewModel : ListViewModel by lazy {
@@ -65,15 +63,15 @@ class List<T> : Fragment() {
         }
     }
 
-    private val CharacterClickListener = object : OnCharacterClickListener{
+    private val characterClickListener = object : OnCharacterClickListener{
         override fun onCharacterClick(character: Character) {
             val manager = parentFragmentManager
             val bundle = Bundle()
-            bundle.putParcelable(Details.BUNDLE_EXTRA, character)
+            //bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, character)
             manager
                 .beginTransaction()
-                .replace(R.id.container, Details.newInstance(bundle))
-                .addToBackStack(Details.BUNDLE_EXTRA)
+                .replace(R.id.container, DetailsFragment.newInstance(bundle))
+                .addToBackStack(DetailsFragment.BUNDLE_EXTRA)
                 .commit()
         }
     }
