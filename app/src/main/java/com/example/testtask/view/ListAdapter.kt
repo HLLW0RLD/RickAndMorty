@@ -15,7 +15,7 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     private var onCharacterClickListener : ListFragment.OnCharacterClickListener? = null
 
     fun setData(newData: List<Character>) {
-        this.charList = newData
+        charList = newData
         notifyDataSetChanged()
     }
 

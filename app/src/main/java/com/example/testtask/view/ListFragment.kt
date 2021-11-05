@@ -30,7 +30,7 @@ class ListFragment : Fragment() {
 
     private val binding get() = _binding!!
 
-    val adapter = ListAdapter()
+    private val adapter = ListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,6 +54,7 @@ class ListFragment : Fragment() {
         is State.Success ->{
             binding.list.visibility = View.VISIBLE
             binding.loading.visibility = View.GONE
+            adapter.setData(state.characterData)
         }
 
         is State.Loading ->{
@@ -67,7 +68,7 @@ class ListFragment : Fragment() {
         override fun onCharacterClick(character: Character) {
             val manager = parentFragmentManager
             val bundle = Bundle()
-            //bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, character)
+            bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, character)
             manager
                 .beginTransaction()
                 .replace(R.id.container, DetailsFragment.newInstance(bundle))

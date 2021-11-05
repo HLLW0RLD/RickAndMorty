@@ -5,14 +5,15 @@
     android:layout_height="200dp"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/main_margin"
-    android:background="@color/card_background"
     android:id="@+id/card">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/card_background">
 
         <ImageView
+            android:layout_margin="@dimen/main_margin"
             android:id="@+id/icon_list"
             android:layout_width="170dp"
             android:layout_height="170dp"

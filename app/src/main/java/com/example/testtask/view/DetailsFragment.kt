@@ -33,6 +33,8 @@ class DetailsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private lateinit var characterBundle: Character
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +53,10 @@ class DetailsFragment : Fragment() {
 
         viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
 
+        viewModel.getCharFromRemote(characterBundle)
+
+        characterBundle = arguments?.getParcelable<Character>(BUNDLE_EXTRA) ?: Character()
+
     }
 
     private fun loadData(state: State?) {
@@ -61,18 +67,18 @@ class DetailsFragment : Fragment() {
                 binding.loading.visibility = View.GONE
 
                 binding.apply {
-                    name.text = state.characterData.name
-                    species.text = state.characterData.species
-                    status.text = state.characterData.status
-                    gender.text = state.characterData.gender
-                    origin.text = state.characterData.origin.name
-                    location.text = state.characterData.location.name
-                    type.text = state.characterData.type
-                    episodes.text = state.characterData.episode.size.toString()
+                    name.text = state.characterData[0].name
+                    species.text = state.characterData[0].species
+                    status.text = state.characterData[0].status
+                    gender.text = state.characterData[0].gender
+                    origin.text = state.characterData[0].origin.name
+                    location.text = state.characterData[0].location.name
+                    type.text = state.characterData[0].type
+                    episodes.text = state.characterData[0].episode.size.toString()
 
                     Glide
                         .with(root)
-                        .load(state.characterData.image)
+                        .load(state.characterData[0].image)
                         .into(detailsIcon)
                 }
             }
