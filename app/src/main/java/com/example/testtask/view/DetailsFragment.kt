@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.testtask.databinding.DetailsBinding
-import com.example.testtask.model.State
 import com.example.testtask.model.character.Character
+import com.example.testtask.viewmodel.DetailsViewModel
 import com.example.testtask.viewmodel.ListViewModel
+import retrofit2.Response
 
 class DetailsFragment : Fragment() {
 
@@ -25,8 +26,8 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private val viewModel : ListViewModel by lazy {
-        ViewModelProvider(this).get(ListViewModel :: class.java)
+    private val viewModel : DetailsViewModel by lazy {
+        ViewModelProvider(this).get(DetailsViewModel :: class.java)
     }
 
     private var _binding : DetailsBinding? = null
@@ -51,43 +52,33 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
+        viewModel.getCharFromRemote(54)
 
-        viewModel.getCharFromRemote(characterBundle)
+        viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
 
         characterBundle = arguments?.getParcelable<Character>(BUNDLE_EXTRA) ?: Character()
 
     }
 
-    private fun loadData(state: State?) {
-        when(state){
+    private fun loadData(response: Character) {
 
-            is State.Success ->{
                 binding.details.visibility = View.VISIBLE
                 binding.loading.visibility = View.GONE
 
                 binding.apply {
-                    name.text = state.characterData[0].name
-                    species.text = state.characterData[0].species
-                    status.text = state.characterData[0].status
-                    gender.text = state.characterData[0].gender
-                    origin.text = state.characterData[0].origin.name
-                    location.text = state.characterData[0].location.name
-                    type.text = state.characterData[0].type
-                    episodes.text = state.characterData[0].episode.size.toString()
+                    name.text = response.name
+                    species.text = response.species
+                    status.text = response.status
+                    gender.text = response.gender
+                    origin.text = response.origin.name
+                    location.text = response.location.name
+                    type.text = response.type
+                    episodes.text = response.episode.size.toString()
 
                     Glide
                         .with(root)
-                        .load(state.characterData[0].image)
+                        .load(response.image)
                         .into(detailsIcon)
                 }
             }
-
-            is State.Loading ->{
-                binding.details.visibility = View.GONE
-                binding.loading.visibility = View.VISIBLE
-            }
-
-        }
-    }
 }

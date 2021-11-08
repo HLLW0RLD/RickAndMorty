@@ -1,36 +1,34 @@
 package com.example.testtask.viewmodel
 
-import android.os.Build
-import android.telephony.DisconnectCause.SERVER_ERROR
-import androidx.annotation.RequiresApi
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.testtask.model.character.Character
+import com.example.testtask.model.factory.PageInfoFactory
 import com.example.testtask.model.remote.RemoteDataSource
-import com.example.testtask.model.State
 import com.example.testtask.model.repository.RemoteRepository
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class ListViewModel(
-    private val liveData: MutableLiveData<State> = MutableLiveData(),
-    private val remoteRepository: RemoteRepository = RemoteRepository(RemoteDataSource())
-) : ViewModel() {
+class ListViewModel : ViewModel() {
+
+    private val remoteRepository = RemoteRepository(RemoteDataSource())
+
+    private val pageInfoFactory = PageInfoFactory(viewModelScope, remoteRepository)
+
+    private val pageListConfig: PagedList.Config = PagedList.Config.Builder()
+        .setPageSize(20)
+        .setPrefetchDistance(40)
+        .build()
+
+    private val liveData: LiveData<PagedList<Character>> =
+        LivePagedListBuilder(
+            pageInfoFactory,
+            pageListConfig
+        ).build()
 
     fun getLiveData() = liveData
 
-    fun getCharFromRemote(character: Character){
-        liveData.value = State.Loading
-        remoteRepository.getCharById(character.id)
-    }
 
-    fun getAllChar(){
-        remoteRepository.getAllChar()
-
-
-
-    }
 }

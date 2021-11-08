@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.testtask.R
 import com.example.testtask.databinding.ListBinding
-import com.example.testtask.model.State
 import com.example.testtask.model.character.Character
 import com.example.testtask.viewmodel.ListViewModel
 
@@ -44,25 +43,12 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
 
-        viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
+        viewModel.getLiveData().observe(viewLifecycleOwner, {adapter.setData(it)})
 
         binding.recyclerview.adapter = adapter
+
     }
 
-    private fun loadData(state: State?) {
-        when(state){
-        is State.Success ->{
-            binding.list.visibility = View.VISIBLE
-            binding.loading.visibility = View.GONE
-            adapter.setData(state.characterData)
-        }
-
-        is State.Loading ->{
-            binding.list.visibility = View.GONE
-            binding.loading.visibility = View.VISIBLE
-        }
-        }
-    }
 
     private val characterClickListener = object : OnCharacterClickListener{
         override fun onCharacterClick(character: Character) {
