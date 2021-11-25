@@ -40,9 +40,6 @@ android {
 
 dependencies {
 
-    //paging
-    implementation "androidx.paging:paging-runtime-ktx:3.0.0"
-
     // сoroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0-M1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0-M1'
@@ -50,6 +47,7 @@ dependencies {
     //viewmodel
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
 
     //retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

@@ -1,17 +1,17 @@
 package com.example.testtask.model.repository
 
-import com.example.testtask.model.CharacterPage
 import com.example.testtask.model.character.Character
+import com.example.testtask.model.character.CharacterList
 import com.example.testtask.model.remote.RemoteDataSource
 
 
-class RemoteRepository (private val remote : RemoteDataSource){
+class RemoteRepository{
 
-    fun getCharById(id : Int): Character{
-        return remote.getCharById(id)
+    suspend fun getChar(id : Int) : Character{
+        return RemoteDataSource.client.getChar(id)
     }
 
-    fun getCharPage(page : Int): CharacterPage{
-        return remote.getCharPage(page)
+    suspend fun getCharPage(page: Int): CharacterList {
+        return RemoteDataSource.client.getCharPage(page)
     }
 }

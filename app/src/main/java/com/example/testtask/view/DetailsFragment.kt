@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.testtask.databinding.DetailsBinding
+import com.example.testtask.databinding.FragmentDetailsBinding
 import com.example.testtask.model.character.Character
-import com.example.testtask.viewmodel.DetailsViewModel
+import com.example.testtask.model.factory.ViewModelFactory
+import com.example.testtask.model.repository.RemoteRepository
 import com.example.testtask.viewmodel.ListViewModel
-import retrofit2.Response
 
 class DetailsFragment : Fragment() {
 
@@ -26,11 +28,10 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private val viewModel : DetailsViewModel by lazy {
-        ViewModelProvider(this).get(DetailsViewModel :: class.java)
-    }
+    private val viewModel : ListViewModel by activityViewModels{ ViewModelFactory(RemoteRepository()) }
 
-    private var _binding : DetailsBinding? = null
+
+    private var _binding : FragmentDetailsBinding? = null
 
     private val binding get() = _binding!!
 
@@ -42,21 +43,13 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
+        viewModel.characterData.observe(viewLifecycleOwner, { loadData(it) })
 
-        _binding = DetailsBinding.inflate(inflater, container, false)
+        arguments?.getParcelable<Character>(BUNDLE_EXTRA)?.let { viewModel.getCharacter(it) }
+
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
         return binding.root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        viewModel.getCharFromRemote(54)
-
-        viewModel.getLiveData().observe(viewLifecycleOwner, {loadData(it)})
-
-        characterBundle = arguments?.getParcelable<Character>(BUNDLE_EXTRA) ?: Character()
 
     }
 

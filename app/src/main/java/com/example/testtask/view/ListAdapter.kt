@@ -15,7 +15,7 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     private var onCharacterClickListener : ListFragment.OnCharacterClickListener? = null
 
     fun setData(newData: List<Character>) {
-        charList = newData
+        this.charList = newData
         notifyDataSetChanged()
     }
 
@@ -43,7 +43,8 @@ class ListAdapter() : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
             binding.species.text = character.species
             binding.status.text = character.status
             binding.gender.text = character.gender
-            binding.root.setOnClickListener { onCharacterClickListener?.onCharacterClick(character) }
+            binding.root.setOnClickListener {
+                onCharacterClickListener?.onCharacterClick(character) }
 
             Glide
                 .with(binding.root)
